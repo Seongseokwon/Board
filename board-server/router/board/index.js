@@ -7,5 +7,5 @@ router.post('/addPost', boardController.addPost);
 router.get('/readPost', boardController.readPost);
 router.put('/updatePost', boardController.updatePost);
 router.post('/deletePost', boardController.deletePost);
-router.get('/detailPost', boardController.detailPost);
+router.post('/detailPost', boardController.detailPost);
 module.exports = router;
