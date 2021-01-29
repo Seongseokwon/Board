@@ -45,7 +45,7 @@ module.exports = {
     // TODO : 글 상세정보
     //이 요청이 들어올때는 클라이언트에서 onClick이벤트 발생 시
     const { id } = req.body;
-    let response = await board.findAll({
+    let response = await board.findOne({
       include: [
         {
           model: user,

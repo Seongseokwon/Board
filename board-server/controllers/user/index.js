@@ -19,7 +19,7 @@ module.exports = {
       } else {
         req.session.userId = response.id;
         res.status(200).json({
-          data: response,
+          data: response.id,
           message: 'Ok',
         });
       }
@@ -78,13 +78,12 @@ module.exports = {
         const boardInfo = await board.findAll({
           where: {
             userId: req.session.userId,
+            isDelete: 1,
           },
         });
         res.status(200).json({
-          data: {
-            user: userInfo,
-            board: boardInfo,
-          },
+          userInfo,
+          boardInfo,
           message: 'OK',
         });
       }
