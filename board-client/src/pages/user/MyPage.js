@@ -48,6 +48,9 @@ class MyPage extends Component {
           <td>{el.createdAt.slice(0, 10)}</td>
           <td>{el.hitCount}</td>
           <td>{el.likeCount}</td>
+          <td>
+            <button>삭제</button>
+          </td>
         </tr>
       );
     });

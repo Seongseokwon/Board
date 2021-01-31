@@ -9,6 +9,7 @@ class SignUp extends Component {
       email: '',
       password: '',
       userName: '',
+      isEmail: false,
       emailCheck: '',
       errorMessage: '',
     };
@@ -21,9 +22,15 @@ class SignUp extends Component {
   handleInputValue = (key) => (e) => {
     if (key === 'email') {
       if (!this.vaildateEmail(e.target.value)) {
-        this.setState({ emailCheck: '유효하지 않은 이메일입니다.' });
+        this.setState({
+          isEmail: false,
+          emailCheck: '유효하지 않은 이메일 입니다.',
+        });
       } else {
-        this.setState({ emailCheck: '유효한 이메일입니다.' });
+        this.setState({
+          isEmail: true,
+          emailCheck: '유효한 이메일 입니다.',
+        });
       }
     }
     this.setState({ [key]: e.target.value });
@@ -44,18 +51,24 @@ class SignUp extends Component {
         return this.setState({
           errorMessage: `${key} 항목이 입력되지 않았습니다.`,
         });
-      } else if (key === 'emailCheck') {
-        if (value !== '유효한 이메일입니다.') {
+      }
+      if (key === 'emailCheck') {
+        if (value !== '유효한 이메일 입니다.') {
           return;
         }
       }
     }
+    const { email, password, userName } = inputData;
     // TODO : 회원가입 요청 보내기 then => 회원가입 완료 / catch => 실패
     axios
-      .post('https://localhost:4000/user/signup', inputData, {
-        'Content-Type': 'application/json',
-        withCredentials: true,
-      })
+      .post(
+        'https://localhost:4000/user/signup',
+        { email, password, userName },
+        {
+          'Content-Type': 'application/json',
+          withCredentials: true,
+        }
+      )
       .then((res) => {
         alert('회원가입 완료');
         this.props.history.push('/');
@@ -80,7 +93,9 @@ class SignUp extends Component {
               <label>Email</label>
               <span></span>
             </div>
-            <div className="emailError">{this.state.emailCheck}</div>
+            <div className={this.state.isEmail ? 'emailOk' : 'emailError'}>
+              {this.state.emailCheck}
+            </div>
             <div className="txt_field">
               <input
                 type="password"
