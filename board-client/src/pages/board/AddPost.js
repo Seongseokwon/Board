@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
@@ -15,16 +14,6 @@ class AddPost extends Component {
     this.setState({ [key]: e.target.value });
   };
 
-  handleAddPost = () => {
-    axios
-      .post(
-        'https://localhost:4000/board/addPost',
-        { title: this.state.title, content: this.state.content },
-        { withCredentials: true, 'Content-Type': 'application/json' }
-      )
-      .then((res) => console.log(res));
-    this.props.history.push('/');
-  };
   render() {
     return (
       <div>
@@ -41,7 +30,13 @@ class AddPost extends Component {
             onChange={this.handleInputValue('content')}
             required
           />
-          <button onClick={this.handleAddPost}>저장</button>
+          <button
+            onClick={() =>
+              this.props.handleAddPost(this.state.title, this.state.content)
+            }
+          >
+            저장
+          </button>
         </div>
       </div>
     );

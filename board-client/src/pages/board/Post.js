@@ -65,6 +65,7 @@ class Post extends Component {
           </thead>
           <tbody className="tableBody">{list}</tbody>
         </table>
+        알라뷰 아먼ㅇ라ㅣㅁㄴ어
       </div>
     );
   }
