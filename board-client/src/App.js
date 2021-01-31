@@ -31,14 +31,16 @@ class App extends Component {
       .then((res) => this.setState({ boardList: res.data.data }))
       .catch((err) => alert(err));
   }
-  componentDidUpdate() {
-    axios
-      .get('https://localhost:4000/board/readPost', {
-        withCredentials: true,
-        'Content-Type': 'application/json',
-      })
-      .then((res) => this.setState({ boardList: res.data.data }))
-      .catch((err) => alert(err));
+  componentDidUpdate(prevProps, prevState) {
+    // console.log(prevState);
+    if (this.state.boardList !== prevState.boardList) {
+      console.log(prevProps, prevState);
+      console.log('변경사항 발생');
+      this.props.history.push('/');
+    }
+    // if (this.state.boardList !== prevState.boardList) {
+
+    // }
   }
   //loginCheck  => setState({isLogin : true})
   loginCheck = () => {
@@ -57,6 +59,15 @@ class App extends Component {
 
   handlePostNumber = (id) => {
     this.setState({ id });
+  };
+  handleAddPost = (title, content) => {
+    axios
+      .post(
+        'https://localhost:4000/board/addPost',
+        { title, content },
+        { withCredentials: true, 'Content-Type': 'application/json' }
+      )
+      .then((res) => this.setState({ boardList: [...this.state.boardList] }));
   };
 
   handlePostUpdate = (id, title, content) => {
@@ -78,7 +89,12 @@ class App extends Component {
           />
           <Route
             path="/addpost"
-            render={() => <AddPost isLogin={this.state.isLogin} />}
+            render={() => (
+              <AddPost
+                isLogin={this.state.isLogin}
+                handleAddPost={this.handleAddPost}
+              />
+            )}
           />
         </Switch>
         <Switch>

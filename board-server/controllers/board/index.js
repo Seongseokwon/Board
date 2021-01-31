@@ -7,13 +7,13 @@ module.exports = {
         res.status(401).json({ message: 'not authorized' });
       } else {
         const { title, content } = req.body;
-        await board.create({
+        let response = await board.create({
           title,
           content,
           userId: req.session.userId,
         });
-
-        res.status(201).send({ message: 'ok' });
+        console.log();
+        res.status(201).send({ data: response.dataValues, message: 'ok' });
       }
     } catch (err) {
       console.log(err);
