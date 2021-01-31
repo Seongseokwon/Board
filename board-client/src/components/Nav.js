@@ -10,6 +10,9 @@ class Nav extends Component {
         </Link>
         {this.props.isLogin ? (
           <div className="btn-box">
+            <Link className="link-btn" to="/addpost">
+              글쓰기
+            </Link>
             <Link className="link-btn" to="/mypage">
               My Page
             </Link>

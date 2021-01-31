@@ -168,4 +168,11 @@ button.submit:hover{
 
 .emailError{
   color: red;
+  transform: translateY(-100px);
+  transition: 1s;
+}
+
+.emailOk{
+  color: rgb(91, 255, 99);
+  transition: .8s;
 }

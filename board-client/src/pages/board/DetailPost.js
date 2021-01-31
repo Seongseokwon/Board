@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class DetailPost extends Component {
   constructor(props) {
@@ -63,6 +64,18 @@ class DetailPost extends Component {
           <p>{date}</p>
           <p>{hitCount}</p>
         </div>
+        <div className="detail_content">
+          <p>{content}</p>
+          <p>{likeCount}</p>
+        </div>
+        <Link
+          onClick={() =>
+            this.props.handlePostUpdate(this.props.id, title, content)
+          }
+          to="/updatepost"
+        >
+          수정하기
+        </Link>
       </div>
     );
   }

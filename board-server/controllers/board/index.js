@@ -67,7 +67,7 @@ module.exports = {
           message: 'login first',
         });
       } else {
-        const { title, content } = req.body;
+        const { title, content, id } = req.body;
         await board.update(
           {
             title,
@@ -76,7 +76,7 @@ module.exports = {
           },
           {
             where: {
-              userId: req.session.userId,
+              id,
             },
           }
         );
